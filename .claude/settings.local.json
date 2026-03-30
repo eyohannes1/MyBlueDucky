@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"b:\\\\AI Automation\\\\Website\\\\client-intake-form\"\" | grep -E \"node_modules)",
+      "Bash(package \")",
+      "Bash(npm run build:*)",
+      "Bash(findstr:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(pnpm install:*)"
+    ]
+  }
+}

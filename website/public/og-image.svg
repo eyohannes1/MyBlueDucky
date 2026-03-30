@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#02040a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1a3a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2C1687;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+    <!-- Water wave pattern -->
+    <pattern id="waves" x="0" y="0" width="200" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 20 Q50 0 100 20 Q150 40 200 20" fill="none" stroke="#2C1687" stroke-width="1.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Wave overlay bottom -->
+  <rect y="480" width="1200" height="150" fill="url(#waves)" opacity="0.6"/>
+  <rect y="510" width="1200" height="120" fill="url(#waves)" opacity="0.4"/>
+
+  <!-- Accent bar -->
+  <rect x="80" y="200" width="8" height="180" fill="url(#textGrad)" rx="4"/>
+
+  <!-- Brand name -->
+  <text x="112" y="270" font-family="Georgia, serif" font-size="72" font-weight="700" fill="#ffffff" letter-spacing="-1">My Blue Ducky</text>
+
+  <!-- Tagline -->
+  <text x="112" y="330" font-family="Georgia, serif" font-size="36" font-style="italic" fill="#ffffff" opacity="0.85">Pool Service &amp; Repair</text>
+
+  <!-- Descriptor -->
+  <text x="112" y="385" font-family="Arial, sans-serif" font-size="24" font-weight="300" fill="#ffffff" opacity="0.65" letter-spacing="3">SURPRISE, AZ · PHOENIX VALLEY</text>
+
+  <!-- Purple accent line -->
+  <rect x="112" y="408" width="120" height="4" fill="url(#textGrad)" rx="2"/>
+
+  <!-- Badge text -->
+  <text x="112" y="460" font-family="Arial, sans-serif" font-size="20" fill="#ffffff" opacity="0.55" letter-spacing="2">Licensed · CPO-Certified · Insured · From $119/mo</text>
+
+  <!-- Duck icon (simple) -->
+  <g transform="translate(960, 180)" opacity="0.15">
+    <ellipse cx="80" cy="160" rx="80" ry="60" fill="#2C1687"/>
+    <ellipse cx="80" cy="100" rx="45" ry="45" fill="#2C1687"/>
+    <ellipse cx="110" cy="95" rx="20" ry="12" fill="#3b82f6"/>
+    <circle cx="95" cy="88" r="6" fill="#ffffff"/>
+    <path d="M118 95 L145 88 L140 102 Z" fill="#f59e0b"/>
+  </g>
+</svg>

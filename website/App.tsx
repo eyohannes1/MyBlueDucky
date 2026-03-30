@@ -202,13 +202,10 @@ const HomeHero = ({ setCurrentPage }: { setCurrentPage: (p: string) => void }) =
 
         <RevealText delay={0.1}>
           <h1 className="font-playfair text-4xl md:text-6xl lg:text-8xl mb-4 leading-none">
-            Designed. Built.
-          </h1>
-        </RevealText>
-
-        <RevealText delay={0.2}>
-          <h1 className="font-playfair text-4xl md:text-6xl lg:text-8xl mb-8 leading-none text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
-            Maintained. Perfected.
+            Designed. Built.{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
+              Maintained. Perfected.
+            </span>
           </h1>
         </RevealText>
 
@@ -421,7 +418,7 @@ const EditorialHighlight = () => {
           </div>
           <div className="order-1 lg:order-2 relative group">
             <div className="aspect-[4/5] relative z-10 shadow-2xl">
-              <ScrollRevealImage src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?q=80&w=2072&auto=format&fit=crop" alt="Pristine coastal pool" className="rounded-sm" />
+              <ScrollRevealImage src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?q=80&w=2072&auto=format&fit=crop" alt="Sparkling backyard pool in Surprise, AZ maintained by My Blue Ducky technicians" className="rounded-sm" />
             </div>
             <motion.div
               initial={{ x: 40, opacity: 0 }}
@@ -430,7 +427,7 @@ const EditorialHighlight = () => {
               transition={{ delay: 0.5, duration: 1 }}
               className="absolute -bottom-10 -left-10 w-2/3 aspect-[4/3] z-20 hidden md:block border-[12px] border-white dark:border-gray-900 shadow-2xl overflow-hidden"
             >
-              <ScrollRevealImage src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=2070&auto=format&fit=crop" alt="Water detail" />
+              <ScrollRevealImage src="https://images.unsplash.com/photo-1519046904884-53103b34b206?q=80&w=2070&auto=format&fit=crop" alt="Crystal-clear pool water after professional chemical balancing service in Phoenix Valley" />
             </motion.div>
           </div>
         </div>
@@ -677,7 +674,7 @@ const Contact = () => {
                     <div className="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
                       <Phone size={20} className="text-primary group-hover:text-white" />
                     </div>
-                    <div className="dark:text-white font-montserrat font-semibold">480-948-2001</div>
+                    <div className="dark:text-white font-montserrat font-semibold">(623)-707-5938</div>
                   </div>
                   <div className="flex items-center gap-4 group">
                     <div className="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
@@ -825,7 +822,7 @@ const Footer = ({ setCurrentPage, setTargetServiceId }: { setCurrentPage: (p: st
           <div>
             <h4 className="font-montserrat font-bold text-[10px] uppercase tracking-[0.3em] mb-8 text-primary">Headquarters</h4>
             <ul className="space-y-5 font-montserrat text-sm text-gray-400">
-              <li className="flex items-center gap-3"><Phone size={14} className="text-primary" /> 480-948-2001</li>
+              <li className="flex items-center gap-3"><Phone size={14} className="text-primary" /> (623)-707-5938</li>
               <li className="hover:text-white transition-colors cursor-pointer">mypool@myblueducky.com</li>
               <li>Serving Scottsdale, Paradise Valley,<br />Fountain Hills, Cave Creek & North Phoenix</li>
             </ul>

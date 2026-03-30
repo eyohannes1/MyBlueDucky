@@ -175,7 +175,7 @@
 - [x] Branded photos (Complete Pool Care truck, technicians)
 
 ### ✅ Contact Information
-- [x] Phone number: 480-948-2001
+- [x] Phone number: (623)-707-5938
 - [x] Email: mypool@mycompletepoolcare.net
 - [x] Service areas listed
 - [x] Google Maps autocomplete integration
