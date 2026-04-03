@@ -193,16 +193,16 @@ const HomeHero = ({ setCurrentPage }: { setCurrentPage: (p: string) => void }) =
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90" />
       </motion.div>
 
-      <div className="relative z-10 container mx-auto px-6 text-center text-white">
-        <RevealText className="mb-4">
+      <div className="relative z-10 container mx-auto px-6 text-center text-white pt-16">
+        <RevealText className="mb-6">
           <span className="font-cormorant text-xl md:text-2xl italic tracking-wider text-white/90">
-            Certified • Licensed • Insured
+            Licensed • Bonded • Insured
           </span>
         </RevealText>
 
         <RevealText delay={0.1}>
-          <h1 className="font-playfair text-4xl md:text-6xl lg:text-8xl mb-4 leading-none">
-            Designed. Built.{" "}
+          <h1 className="font-playfair text-4xl md:text-6xl lg:text-8xl mb-8 leading-none">
+            Designed. Built.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">
               Maintained. Perfected.
             </span>
@@ -214,11 +214,11 @@ const HomeHero = ({ setCurrentPage }: { setCurrentPage: (p: string) => void }) =
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.4, ease: [0.19, 1, 0.22, 1] }}
-          className="w-24 h-2 bg-primary mx-auto mb-10"
+          className="w-24 h-2 bg-primary mx-auto mt-4 mb-6"
         />
 
         <FadeIn delay={0.5} className="max-w-xl mx-auto flex justify-center flex-col items-center">
-          <p className="font-montserrat font-light text-lg md:text-xl leading-relaxed mb-10 text-white/80">
+          <p className="font-montserrat font-light text-lg md:text-xl leading-relaxed mb-6 text-white/80">
             Premium care for the modern aquatic lifestyle. We bring clarity and architectural sophistication to your backyard sanctuary.
           </p>
           <button
@@ -680,7 +680,7 @@ const Contact = () => {
                     <div className="w-12 h-12 rounded-full border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
                       <Droplets size={20} className="text-primary group-hover:text-white" />
                     </div>
-                    <div className="dark:text-white font-montserrat font-semibold">mypool@myblueducky.com</div>
+                    <div className="dark:text-white font-montserrat font-semibold">info@myblueducky.com</div>
                   </div>
                 </div>
               </FadeIn>
