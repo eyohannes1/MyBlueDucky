@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Star, ShieldCheck, Award, ArrowRight, Droplets, Wrench, Hammer, Phone, Moon, Sun, CheckCircle2, AlertCircle, ChevronRight, Building2 } from 'lucide-react';
+import { Menu, X, Star, ShieldCheck, Award, ArrowRight, Droplets, Wrench, Hammer, Phone, Moon, Sun, CheckCircle2, AlertCircle, ChevronRight, ChevronDown, Building2, ExternalLink } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Analytics } from '@vercel/analytics/react';
 import ReactMarkdown from 'react-markdown';
 import { blogPosts, BlogPost } from './blogPosts';
+import { faqData } from './faqData';
 
 // --- Reusable UI Components ---
 
@@ -274,25 +275,25 @@ const PageHero = ({ title, subtitle, src }: { title: string, subtitle: string, s
 const HomeFeatures = ({ setCurrentPage, setTargetServiceId }: { setCurrentPage: (p: string) => void, setTargetServiceId: (id: string | null) => void }) => {
   const features = [
     {
+      title: "Pool Construction",
+      desc: "Custom pool construction tailored to your vision. From design to completion, we build your dream backyard oasis.",
+      icon: <Building2 className="w-8 h-8 text-primary" />,
+      img: "/assets/images/pool-construction-image.jpg",
+      targetId: "pool-construction"
+    },
+    {
+      title: "Pool Remodeling",
+      desc: "Transform your existing pool with modern upgrades, new finishes, and enhanced features.",
+      icon: <Hammer className="w-8 h-8 text-primary" />,
+      img: "/assets/images/luxury_backyard_pool_1771469141679.png",
+      targetId: "pool-remodel"
+    },
+    {
       title: "Weekly Pool Service",
       desc: "Starting at $119/mo. Professional weekly pool service with uniformed and trained technicians.",
       icon: <Droplets className="w-8 h-8 text-primary" />,
       img: "/assets/images/technician_skimming_pool_1771469105393.png",
       targetId: "weekly-service"
-    },
-    {
-      title: "Weekly Service Deluxe",
-      desc: "$199/mo. Includes advanced features and priority support for your peace of mind.",
-      icon: <Wrench className="w-8 h-8 text-primary" />,
-      img: "/assets/images/ChatGPT Image Feb 13, 2026, 07_16_32 PM.png",
-      targetId: "deluxe-service"
-    },
-    {
-      title: "Filter Cleaning",
-      desc: "$145. One-time cartridge filter cleaning to ensure crystal clear water.",
-      icon: <Hammer className="w-8 h-8 text-primary" />,
-      img: "/assets/images/pool_equipment_repair_1771469056912.png",
-      targetId: "repairs-installs"
     }
   ];
 
@@ -784,6 +785,150 @@ const Contact = () => {
   );
 };
 
+const FAQ = ({ setCurrentPage, setSelectedFaqSlug }: { setCurrentPage: (p: string) => void, setSelectedFaqSlug: (slug: string) => void }) => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section id="faq" className="py-24 md:py-32 bg-white dark:bg-black transition-colors duration-500">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <RevealText>
+            <h2 className="font-playfair text-4xl md:text-5xl mb-6 dark:text-white leading-tight">
+              Common Questions
+            </h2>
+          </RevealText>
+          <FadeIn>
+            <p className="font-montserrat font-light text-gray-600 dark:text-gray-400 text-lg">
+              Answers to frequently asked questions about pool service in Surprise, AZ and the greater Phoenix Valley.
+            </p>
+          </FadeIn>
+        </div>
+
+        <div className="max-w-3xl mx-auto divide-y divide-gray-200 dark:divide-gray-800">
+          {faqData.map((item, index) => (
+            <FadeIn key={item.id} delay={index * 0.05}>
+              <div className="py-6">
+                <button
+                  onClick={() => toggle(index)}
+                  className="w-full flex justify-between items-center text-left group cursor-pointer"
+                  aria-expanded={openIndex === index}
+                >
+                  <span className="font-playfair text-xl md:text-2xl dark:text-white group-hover:text-primary transition-colors pr-8">
+                    {item.question}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: openIndex === index ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex-shrink-0"
+                  >
+                    <ChevronDown className="text-primary" size={24} />
+                  </motion.div>
+                </button>
+                <AnimatePresence initial={false}>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <p className="font-montserrat font-light text-gray-600 dark:text-gray-400 pt-4 text-base leading-relaxed">
+                        {item.briefAnswer}{' '}
+                        <a
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setSelectedFaqSlug(item.linkSlug);
+                            setCurrentPage('faq-article');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
+                          className="text-primary font-semibold hover:underline cursor-pointer inline-flex items-center gap-1"
+                        >
+                          {item.linkText} <ArrowRight size={14} />
+                        </a>
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const FAQArticlePlaceholder = ({ slug, setCurrentPage }: { slug: string, setCurrentPage: (p: string) => void }) => {
+  const item = faqData.find(f => f.linkSlug === slug);
+
+  return (
+    <section className="py-24 md:py-32 bg-white dark:bg-black transition-colors duration-500 min-h-screen">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto">
+          <FadeIn>
+            <button
+              onClick={() => {
+                setCurrentPage('home');
+                setTimeout(() => {
+                  document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              }}
+              className="font-montserrat text-primary hover:underline mb-8 inline-flex items-center gap-2 cursor-pointer"
+            >
+              <ArrowRight size={16} className="rotate-180" /> Back to FAQ
+            </button>
+          </FadeIn>
+          {item && (
+            <FadeIn delay={0.1}>
+              <h1 className="font-playfair text-3xl md:text-5xl mb-8 dark:text-white leading-tight">
+                {item.question}
+              </h1>
+              <div className="font-montserrat text-gray-600 dark:text-gray-400 text-lg leading-relaxed space-y-6">
+                <p>{item.schemaAnswer}</p>
+                <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-sm p-6 mt-8">
+                  <p className="text-sm text-gray-500 dark:text-gray-500 uppercase tracking-widest font-bold mb-2">Source</p>
+                  <a
+                    href={item.externalLink.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline inline-flex items-center gap-2"
+                  >
+                    {item.externalLink.text} <ExternalLink size={14} />
+                  </a>
+                  <p className="text-sm text-gray-400 dark:text-gray-600 mt-1">{item.externalLink.source}</p>
+                </div>
+                <div className="border-t border-gray-200 dark:border-gray-800 pt-8 mt-8">
+                  <p className="text-base">
+                    Have more questions?{' '}
+                    <a
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage('home');
+                        setTimeout(() => {
+                          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                      }}
+                      className="text-primary font-semibold hover:underline cursor-pointer"
+                    >
+                      Contact us for a free consultation
+                    </a>{' '}
+                    or call <a href="tel:6237075938" className="text-primary font-semibold hover:underline">(623)-707-5938</a>.
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Footer = ({ setCurrentPage, setTargetServiceId }: { setCurrentPage: (p: string) => void, setTargetServiceId: (id: string | null) => void }) => {
   return (
     <footer className="bg-black text-white pt-24 pb-12 border-t border-white/5">
@@ -860,25 +1005,44 @@ const ServicesPage = ({ targetServiceId, setTargetServiceId }: { targetServiceId
 
   const serviceCategories = [
     {
+      id: "pool-construction",
+      title: "Pool Construction",
+      description: "Custom pool construction from concept to completion. We design and build pools that perfectly complement your home and lifestyle.",
+      items: ["Custom Design", "Gunite & Plaster", "Tile & Coping", "Decking & Hardscape", "Equipment Installation"],
+      image: "/assets/images/pool-construction-image.jpg",
+      link: { href: "https://www.npcpool.com/", text: "Learn more about gunite & plaster standards" }
+    },
+    {
+      id: "pool-remodel",
+      title: "Pool Remodeling",
+      description: "Breathe new life into your existing pool with modern finishes, upgraded equipment, and enhanced features.",
+      items: ["Replastering", "Tile Replacement", "Equipment Upgrades", "Water Feature Additions", "LED Lighting"],
+      image: "/assets/images/luxury_backyard_pool_1771469141679.png",
+      link: { href: "https://www.phta.org/", text: "Pool renovation best practices" }
+    },
+    {
       id: "weekly-service",
       title: "Weekly Pool Service",
       description: "Starting at $119/mo. Our primary service package ensuring consistent, professional care for your pool.",
       items: ["Weekly Service", "Chemical Balancing", "Equipment Check", "Surface Skimming", "Basket Emptying"],
-      image: "/assets/images/weekly_pool_service_action_1771468201115.png"
+      image: "/assets/images/weekly_pool_service_action_1771468201115.png",
+      link: { href: "https://www.cdc.gov/healthy-swimming/", text: "CDC pool maintenance guidelines" }
     },
     {
       id: "deluxe-service",
       title: "Deluxe Pool Service",
       description: "$199/mo. The ultimate peace of mind package with priority support and advanced maintenance.",
       items: ["All Weekly Features", "Filter Cleaning Included", "Priority Dispatch", "Detailed Digital Reports", "Salt Cell Inspection"],
-      image: "/assets/images/deluxe_pool_luxury_1771468970085.png"
+      image: "/assets/images/deluxe_pool_luxury_1771468970085.png",
+      link: { href: "https://www.nspf.org/", text: "About CPO certification standards" }
     },
     {
       id: "repairs-installs",
       title: "Repairs & Installs",
       description: "Factory trained technicians providing prompt and reliable solutions for all major brands.",
       items: ["Pump Repairs", "Filter Cleans", "Heater Troubleshooting", "Automation Systems", "Plumbing Leaks"],
-      image: "/assets/images/weekly_service_tech_1771468929887.png"
+      image: "/assets/images/weekly_service_tech_1771468929887.png",
+      link: { href: "https://www.energy.gov/energysaver/swimming-pool-energy-efficiency", text: "DOE pool equipment efficiency guide" }
     }
   ];
 
@@ -909,6 +1073,13 @@ const ServicesPage = ({ targetServiceId, setTargetServiceId }: { targetServiceId
                       </li>
                     ))}
                   </ul>
+                  {category.link && (
+                    <a href={category.link.href} target="_blank" rel="noopener noreferrer"
+                       className="inline-flex items-center gap-2 mt-6 font-montserrat text-sm text-primary hover:underline">
+                      {category.link.text}
+                      <ExternalLink size={14} />
+                    </a>
+                  )}
                 </FadeIn>
               </div>
               <div className="flex-1 w-full">
@@ -1095,6 +1266,7 @@ const App = () => {
   const [isDark, setIsDark] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
   const [targetServiceId, setTargetServiceId] = useState<string | null>(null);
+  const [selectedFaqSlug, setSelectedFaqSlug] = useState<string | null>(null);
 
   useEffect(() => {
     if (isDark) {
@@ -1128,9 +1300,13 @@ const App = () => {
             setCurrentPage={setCurrentPage}
           />
         )}
+        {currentPage === 'faq-article' && selectedFaqSlug && (
+          <FAQArticlePlaceholder slug={selectedFaqSlug} setCurrentPage={setCurrentPage} />
+        )}
 
         {/* Contact section is always visible at the bottom of all pages for conversion */}
         <Contact />
+        <FAQ setCurrentPage={setCurrentPage} setSelectedFaqSlug={setSelectedFaqSlug} />
       </main>
 
       <Footer setCurrentPage={setCurrentPage} setTargetServiceId={setTargetServiceId} />
