@@ -148,14 +148,22 @@ const Header = ({ isDark, setIsDark, currentPage, setCurrentPage, setTargetServi
             className="fixed inset-0 bg-white dark:bg-black z-40 flex flex-col justify-center items-center"
           >
             <nav className="flex flex-col gap-8 text-center">
-              {['Home', 'Services', 'About', 'Blog', 'Contact'].map((item, i) => (
+              {['Home', 'Services', 'About', 'Blog', 'FAQ', 'Contact'].map((item, i) => (
                 <motion.button
                   key={item}
                   onClick={() => {
-                    if (item === 'Contact') {
+                    if (item === 'Contact' || item === 'FAQ') {
                       setIsOpen(false);
-                      const contactSection = document.getElementById('contact');
-                      if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+                      if (currentPage !== 'home') {
+                        setCurrentPage('home');
+                        setTimeout(() => {
+                          const section = document.getElementById(item.toLowerCase());
+                          if (section) section.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                      } else {
+                        const section = document.getElementById(item.toLowerCase());
+                        if (section) section.scrollIntoView({ behavior: 'smooth' });
+                      }
                     } else {
                       handleNav(item.toLowerCase());
                     }
@@ -487,6 +495,137 @@ const Testimonials = () => {
   );
 };
 
+const galleryItems = [
+  { id: 1, title: "Crystal Clear", desc: "Pristine water, every time.", url: "/gallery/IMG_0193.jpg", span: "md:col-span-2 md:row-span-2" },
+  { id: 2, title: "Tile & Stone", desc: "Detail-oriented care.", url: "/gallery/IMG_0181.jpg", span: "md:row-span-1" },
+  { id: 3, title: "Equipment Check", desc: "Keeping systems running.", url: "/gallery/IMG_0187.jpg", span: "md:row-span-1" },
+  { id: 4, title: "Surface Finish", desc: "Polished to perfection.", url: "/gallery/IMG_0277.jpg", span: "md:row-span-2" },
+  { id: 5, title: "Water Chemistry", desc: "Balanced for safety.", url: "/gallery/IMG_4128.jpg", span: "md:row-span-1" },
+  { id: 6, title: "Full Service", desc: "End-to-end pool care.", url: "/gallery/IMG_4150.jpg", span: "md:col-span-2 md:row-span-1" },
+  { id: 7, title: "Filter Maintenance", desc: "Clean filters, clean water.", url: "/gallery/IMG_7339.jpg", span: "md:row-span-1" },
+  { id: 8, title: "Evening Glow", desc: "Beautiful at any hour.", url: "/gallery/IMG_7568.jpg", span: "md:row-span-2" },
+  { id: 9, title: "Deck & Surround", desc: "The full picture.", url: "/gallery/IMG_0565.jpg", span: "md:col-span-2 md:row-span-1" },
+  { id: 10, title: "Sparkling Blue", desc: "Inviting and refreshing.", url: "/gallery/IMG_0244.jpg", span: "md:row-span-1" },
+  { id: 11, title: "Pool Perfection", desc: "Ready for a swim.", url: "/gallery/IMG_0288.jpg", span: "md:row-span-2" },
+  { id: 12, title: "Desert Oasis", desc: "Your backyard retreat.", url: "/gallery/IMG_4228.jpg", span: "md:row-span-1" },
+  { id: 13, title: "Weekly Service", desc: "Consistent quality care.", url: "/gallery/IMG_0399.jpg", span: "md:col-span-2 md:row-span-1" },
+  { id: 14, title: "Skimmer Detail", desc: "No debris left behind.", url: "/gallery/IMG_7693.jpg", span: "md:row-span-1" },
+  { id: 15, title: "Pristine Finish", desc: "Spotless every visit.", url: "/gallery/IMG_7481.jpg", span: "md:row-span-2" },
+  { id: 16, title: "Before & After", desc: "Transformations that speak.", url: "/gallery/IMG_0160.jpg", span: "md:row-span-1" },
+  { id: 17, title: "Poolside Living", desc: "Arizona living at its best.", url: "/gallery/IMG_6361.jpg", span: "md:col-span-2 md:row-span-1" },
+  { id: 18, title: "Deep Clean", desc: "Thorough and reliable.", url: "/gallery/IMG_3468.jpg", span: "md:row-span-1" },
+  { id: 19, title: "Water Feature", desc: "Every detail matters.", url: "/gallery/IMG_0292.jpg", span: "md:row-span-2" },
+  { id: 20, title: "Morning Calm", desc: "Peace of mind, guaranteed.", url: "/gallery/IMG_0176.jpg", span: "md:row-span-1" },
+  { id: 21, title: "Equipment Room", desc: "Professional-grade systems.", url: "/gallery/IMG_4109.jpg", span: "md:col-span-2 md:row-span-1" },
+  { id: 22, title: "Happy Client", desc: "Another pool, another smile.", url: "/gallery/IMG_0425.jpg", span: "md:row-span-1" },
+];
+
+const GallerySection = () => {
+  const [selectedImage, setSelectedImage] = useState<typeof galleryItems[0] | null>(null);
+  const [dragConstraint, setDragConstraint] = useState(0);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const gridRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const calc = () => {
+      if (gridRef.current && containerRef.current) {
+        const cw = containerRef.current.offsetWidth;
+        const gw = gridRef.current.scrollWidth;
+        setDragConstraint(Math.min(0, cw - gw - 32));
+      }
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
+  return (
+    <section className="py-24 bg-white dark:bg-gray-950 transition-colors duration-500 overflow-hidden">
+      <div className="container mx-auto px-6 text-center mb-12">
+        <RevealText>
+          <span className="font-cormorant text-2xl text-primary italic block mb-4">Gallery</span>
+        </RevealText>
+        <RevealText delay={0.1}>
+          <h2 className="font-playfair text-4xl md:text-5xl dark:text-white">Our Work</h2>
+        </RevealText>
+        <FadeIn delay={0.2}>
+          <p className="font-montserrat text-sm text-gray-500 dark:text-gray-400 mt-4 max-w-2xl mx-auto leading-relaxed">
+            Real results from real pools across the Valley. Drag to explore, click to expand.
+          </p>
+        </FadeIn>
+      </div>
+
+      <div ref={containerRef} className="relative w-full cursor-grab active:cursor-grabbing">
+        <motion.div
+          className="w-max"
+          drag="x"
+          dragConstraints={{ left: dragConstraint, right: 0 }}
+          dragElastic={0.05}
+        >
+          <motion.div
+            ref={gridRef}
+            className="grid auto-cols-[minmax(15rem,1fr)] grid-flow-col gap-4 px-4 md:px-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+          >
+            {galleryItems.map((item) => (
+              <motion.div
+                key={item.id}
+                variants={{ hidden: { opacity: 0, y: 20, scale: 0.95 }, visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 100, damping: 15 } } }}
+                className={`group relative flex h-full min-h-[15rem] w-full min-w-[15rem] cursor-pointer items-end overflow-hidden rounded-xl p-4 shadow-sm transition-shadow duration-300 hover:shadow-lg ${item.span}`}
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                onClick={() => setSelectedImage(item)}
+                onKeyDown={(e) => e.key === "Enter" && setSelectedImage(item)}
+                tabIndex={0}
+                aria-label={`View ${item.title}`}
+              >
+                <img src={item.url} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  <h3 className="font-playfair text-lg font-bold text-white">{item.title}</h3>
+                  <p className="font-montserrat mt-1 text-sm text-white/80">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            onClick={() => setSelectedImage(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="relative w-full max-w-4xl p-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img src={selectedImage.url} alt={selectedImage.title} className="h-auto max-h-[90vh] w-full rounded-lg object-contain" />
+            </motion.div>
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute right-4 top-4 text-white/80 transition-colors hover:text-white"
+              aria-label="Close image view"
+            >
+              <X size={24} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
+};
+
 const BlogSection = ({ setCurrentPage, setSelectedPostId }: { setCurrentPage: (p: string) => void, setSelectedPostId: (id: string) => void }) => {
   const recentPosts = blogPosts.slice(0, 3);
 
@@ -787,9 +926,24 @@ const Contact = () => {
 
 const FAQ = ({ setCurrentPage, setSelectedFaqSlug }: { setCurrentPage: (p: string) => void, setSelectedFaqSlug: (slug: string) => void }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(3);
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const showMore = () => {
+    setVisibleCount(prev => Math.min(prev + 3, faqData.length));
+  };
+
+  const showLess = () => {
+    setVisibleCount(3);
+    const section = document.getElementById('faq');
+    if (section) {
+      const yOffset = -100; // Offset for header
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -809,7 +963,7 @@ const FAQ = ({ setCurrentPage, setSelectedFaqSlug }: { setCurrentPage: (p: strin
         </div>
 
         <div className="max-w-3xl mx-auto divide-y divide-gray-200 dark:divide-gray-800">
-          {faqData.map((item, index) => (
+          {faqData.slice(0, visibleCount).map((item, index) => (
             <FadeIn key={item.id} delay={index * 0.05}>
               <div className="py-6">
                 <button
@@ -858,6 +1012,26 @@ const FAQ = ({ setCurrentPage, setSelectedFaqSlug }: { setCurrentPage: (p: strin
             </FadeIn>
           ))}
         </div>
+
+        {faqData.length > 3 && (
+          <div className="mt-12 text-center">
+            {visibleCount < faqData.length ? (
+              <button
+                onClick={showMore}
+                className="group inline-flex items-center gap-2 bg-transparent text-primary border border-primary/20 px-8 py-4 font-montserrat text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-300 rounded-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              >
+                See More <ChevronDown size={16} className="group-hover:translate-y-1 transition-transform" />
+              </button>
+            ) : (
+              <button
+                onClick={showLess}
+                className="group inline-flex items-center gap-2 bg-transparent text-primary border border-primary/20 px-8 py-4 font-montserrat text-xs font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all duration-300 rounded-sm cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              >
+                See Less <ChevronDown size={16} className="rotate-180 group-hover:-translate-y-1 transition-transform" />
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -1288,6 +1462,7 @@ const App = () => {
             <Testimonials />
             <SocialProof />
             {/* EditorialHighlight removed */}
+            <GallerySection />
             <BlogSection setCurrentPage={setCurrentPage} setSelectedPostId={setSelectedPostId} />
           </>
         )}
@@ -1304,9 +1479,10 @@ const App = () => {
           <FAQArticlePlaceholder slug={selectedFaqSlug} setCurrentPage={setCurrentPage} />
         )}
 
+        {/* FAQ section above Contact section for better flow */}
+        <FAQ setCurrentPage={setCurrentPage} setSelectedFaqSlug={setSelectedFaqSlug} />
         {/* Contact section is always visible at the bottom of all pages for conversion */}
         <Contact />
-        <FAQ setCurrentPage={setCurrentPage} setSelectedFaqSlug={setSelectedFaqSlug} />
       </main>
 
       <Footer setCurrentPage={setCurrentPage} setTargetServiceId={setTargetServiceId} />
