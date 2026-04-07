@@ -53,6 +53,8 @@ const ScrollRevealImage = ({ src, alt, className = "" }: { src: string, alt: str
         }}
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
         className="w-full h-full object-cover object-center transition-transform duration-700 ease-out"
       />
       <div className="absolute inset-0 bg-primary/5 mix-blend-multiply opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -195,8 +197,10 @@ const HomeHero = ({ setCurrentPage }: { setCurrentPage: (p: string) => void }) =
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
       <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
         <img
-          src="/assets/images/hero_pool_deck.jpg"
+          src="/assets/images/hero_pool_deck.webp"
           alt="Luxury pool deck at sunset"
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover brightness-[0.5]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90" />
@@ -261,6 +265,8 @@ const PageHero = ({ title, subtitle, src }: { title: string, subtitle: string, s
         <img
           src={src}
           alt={title}
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover opacity-80"
           style={{ imageRendering: 'auto' }} // auto uses default smooth scaling
         />
@@ -286,21 +292,21 @@ const HomeFeatures = ({ setCurrentPage, setTargetServiceId }: { setCurrentPage: 
       title: "Pool Construction",
       desc: "Custom pool construction tailored to your vision. From design to completion, we build your dream backyard oasis.",
       icon: <Building2 className="w-8 h-8 text-primary" />,
-      img: "/assets/images/pool-construction-image.jpg",
+      img: "/assets/images/pool-construction-image.webp",
       targetId: "pool-construction"
     },
     {
       title: "Pool Remodeling",
       desc: "Transform your existing pool with modern upgrades, new finishes, and enhanced features.",
       icon: <Hammer className="w-8 h-8 text-primary" />,
-      img: "/assets/images/luxury_backyard_pool_1771469141679.png",
+      img: "/assets/images/luxury_backyard_pool_1771469141679.webp",
       targetId: "pool-remodel"
     },
     {
       title: "Weekly Pool Service",
       desc: "Starting at $119/mo. Professional weekly pool service with uniformed and trained technicians.",
       icon: <Droplets className="w-8 h-8 text-primary" />,
-      img: "/assets/images/technician_skimming_pool_1771469105393.png",
+      img: "/assets/images/technician_skimming_pool_1771469105393.webp",
       targetId: "weekly-service"
     }
   ];
@@ -496,28 +502,28 @@ const Testimonials = () => {
 };
 
 const galleryItems = [
-  { id: 1, title: "Crystal Clear", desc: "Pristine water, every time.", url: "/gallery/IMG_0193.jpg", span: "md:col-span-2 md:row-span-2" },
-  { id: 2, title: "Tile & Stone", desc: "Detail-oriented care.", url: "/gallery/IMG_0181.jpg", span: "md:row-span-1" },
-  { id: 3, title: "Equipment Check", desc: "Keeping systems running.", url: "/gallery/IMG_0187.jpg", span: "md:row-span-1" },
-  { id: 4, title: "Surface Finish", desc: "Polished to perfection.", url: "/gallery/IMG_0277.jpg", span: "md:row-span-2" },
-  { id: 5, title: "Water Chemistry", desc: "Balanced for safety.", url: "/gallery/IMG_4128.jpg", span: "md:row-span-1" },
-  { id: 6, title: "Full Service", desc: "End-to-end pool care.", url: "/gallery/IMG_4150.jpg", span: "md:col-span-2 md:row-span-1" },
-  { id: 7, title: "Filter Maintenance", desc: "Clean filters, clean water.", url: "/gallery/IMG_7339.jpg", span: "md:row-span-1" },
-  { id: 8, title: "Evening Glow", desc: "Beautiful at any hour.", url: "/gallery/IMG_7568.jpg", span: "md:row-span-2" },
-  { id: 9, title: "Deck & Surround", desc: "The full picture.", url: "/gallery/IMG_0565.jpg", span: "md:col-span-2 md:row-span-1" },
-  { id: 10, title: "Sparkling Blue", desc: "Inviting and refreshing.", url: "/gallery/IMG_0244.jpg", span: "md:row-span-1" },
-  { id: 11, title: "Pool Perfection", desc: "Ready for a swim.", url: "/gallery/IMG_0288.jpg", span: "md:row-span-2" },
-  { id: 12, title: "Desert Oasis", desc: "Your backyard retreat.", url: "/gallery/IMG_4228.jpg", span: "md:row-span-1" },
-  { id: 13, title: "Weekly Service", desc: "Consistent quality care.", url: "/gallery/IMG_0399.jpg", span: "md:col-span-2 md:row-span-1" },
-  { id: 14, title: "Skimmer Detail", desc: "No debris left behind.", url: "/gallery/IMG_7693.jpg", span: "md:row-span-1" },
-  { id: 15, title: "Pristine Finish", desc: "Spotless every visit.", url: "/gallery/IMG_7481.jpg", span: "md:row-span-2" },
-  { id: 16, title: "Before & After", desc: "Transformations that speak.", url: "/gallery/IMG_0160.jpg", span: "md:row-span-1" },
-  { id: 17, title: "Poolside Living", desc: "Arizona living at its best.", url: "/gallery/IMG_6361.jpg", span: "md:col-span-2 md:row-span-1" },
-  { id: 18, title: "Deep Clean", desc: "Thorough and reliable.", url: "/gallery/IMG_3468.jpg", span: "md:row-span-1" },
-  { id: 19, title: "Water Feature", desc: "Every detail matters.", url: "/gallery/IMG_0292.jpg", span: "md:row-span-2" },
-  { id: 20, title: "Morning Calm", desc: "Peace of mind, guaranteed.", url: "/gallery/IMG_0176.jpg", span: "md:row-span-1" },
-  { id: 21, title: "Equipment Room", desc: "Professional-grade systems.", url: "/gallery/IMG_4109.jpg", span: "md:col-span-2 md:row-span-1" },
-  { id: 22, title: "Happy Client", desc: "Another pool, another smile.", url: "/gallery/IMG_0425.jpg", span: "md:row-span-1" },
+  { id: 1, title: "Crystal Clear", desc: "Pristine water, every time.", url: "/gallery/IMG_0193.webp", span: "md:col-span-2 md:row-span-2" },
+  { id: 2, title: "Tile & Stone", desc: "Detail-oriented care.", url: "/gallery/IMG_0181.webp", span: "md:row-span-1" },
+  { id: 3, title: "Equipment Check", desc: "Keeping systems running.", url: "/gallery/IMG_0187.webp", span: "md:row-span-1" },
+  { id: 4, title: "Surface Finish", desc: "Polished to perfection.", url: "/gallery/IMG_0277.webp", span: "md:row-span-2" },
+  { id: 5, title: "Water Chemistry", desc: "Balanced for safety.", url: "/gallery/IMG_4128.webp", span: "md:row-span-1" },
+  { id: 6, title: "Full Service", desc: "End-to-end pool care.", url: "/gallery/IMG_4150.webp", span: "md:col-span-2 md:row-span-1" },
+  { id: 7, title: "Filter Maintenance", desc: "Clean filters, clean water.", url: "/gallery/IMG_7339.webp", span: "md:row-span-1" },
+  { id: 8, title: "Evening Glow", desc: "Beautiful at any hour.", url: "/gallery/IMG_7568.webp", span: "md:row-span-2" },
+  { id: 9, title: "Deck & Surround", desc: "The full picture.", url: "/gallery/IMG_0565.webp", span: "md:col-span-2 md:row-span-1" },
+  { id: 10, title: "Sparkling Blue", desc: "Inviting and refreshing.", url: "/gallery/IMG_0244.webp", span: "md:row-span-1" },
+  { id: 11, title: "Pool Perfection", desc: "Ready for a swim.", url: "/gallery/IMG_0288.webp", span: "md:row-span-2" },
+  { id: 12, title: "Desert Oasis", desc: "Your backyard retreat.", url: "/gallery/IMG_4228.webp", span: "md:row-span-1" },
+  { id: 13, title: "Weekly Service", desc: "Consistent quality care.", url: "/gallery/IMG_0399.webp", span: "md:col-span-2 md:row-span-1" },
+  { id: 14, title: "Skimmer Detail", desc: "No debris left behind.", url: "/gallery/IMG_7693.webp", span: "md:row-span-1" },
+  { id: 15, title: "Pristine Finish", desc: "Spotless every visit.", url: "/gallery/IMG_7481.webp", span: "md:row-span-2" },
+  { id: 16, title: "Before & After", desc: "Transformations that speak.", url: "/gallery/IMG_0160.webp", span: "md:row-span-1" },
+  { id: 17, title: "Poolside Living", desc: "Arizona living at its best.", url: "/gallery/IMG_6361.webp", span: "md:col-span-2 md:row-span-1" },
+  { id: 18, title: "Deep Clean", desc: "Thorough and reliable.", url: "/gallery/IMG_3468.webp", span: "md:row-span-1" },
+  { id: 19, title: "Water Feature", desc: "Every detail matters.", url: "/gallery/IMG_0292.webp", span: "md:row-span-2" },
+  { id: 20, title: "Morning Calm", desc: "Peace of mind, guaranteed.", url: "/gallery/IMG_0176.webp", span: "md:row-span-1" },
+  { id: 21, title: "Equipment Room", desc: "Professional-grade systems.", url: "/gallery/IMG_4109.webp", span: "md:col-span-2 md:row-span-1" },
+  { id: 22, title: "Happy Client", desc: "Another pool, another smile.", url: "/gallery/IMG_0425.webp", span: "md:row-span-1" },
 ];
 
 const GallerySection = () => {
@@ -582,7 +588,7 @@ const GallerySection = () => {
                 tabIndex={0}
                 aria-label={`View ${item.title}`}
               >
-                <img src={item.url} alt={item.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <img src={item.url} alt={item.title} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                   <h3 className="font-playfair text-lg font-bold text-white">{item.title}</h3>
@@ -610,7 +616,7 @@ const GallerySection = () => {
               className="relative w-full max-w-4xl p-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <img src={selectedImage.url} alt={selectedImage.title} className="h-auto max-h-[90vh] w-full rounded-lg object-contain" />
+              <img src={selectedImage.url} alt={selectedImage.title} decoding="async" className="h-auto max-h-[90vh] w-full rounded-lg object-contain" />
             </motion.div>
             <button
               onClick={() => setSelectedImage(null)}
@@ -659,7 +665,7 @@ const BlogSection = ({ setCurrentPage, setSelectedPostId }: { setCurrentPage: (p
                 className="cursor-pointer group block h-full bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm overflow-hidden flex flex-col"
               >
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
                 <div className="p-8 flex flex-col flex-1">
                   <div className="font-montserrat text-xs font-bold uppercase tracking-widest text-primary mb-4">{post.date}</div>
@@ -1183,7 +1189,7 @@ const ServicesPage = ({ targetServiceId, setTargetServiceId }: { targetServiceId
       title: "Pool Construction",
       description: "Custom pool construction from concept to completion. We design and build pools that perfectly complement your home and lifestyle.",
       items: ["Custom Design", "Gunite & Plaster", "Tile & Coping", "Decking & Hardscape", "Equipment Installation"],
-      image: "/assets/images/pool-construction-image.jpg",
+      image: "/assets/images/pool-construction-image.webp",
       link: { href: "https://www.npcpool.com/", text: "Learn more about gunite & plaster standards" }
     },
     {
@@ -1191,7 +1197,7 @@ const ServicesPage = ({ targetServiceId, setTargetServiceId }: { targetServiceId
       title: "Pool Remodeling",
       description: "Breathe new life into your existing pool with modern finishes, upgraded equipment, and enhanced features.",
       items: ["Replastering", "Tile Replacement", "Equipment Upgrades", "Water Feature Additions", "LED Lighting"],
-      image: "/assets/images/luxury_backyard_pool_1771469141679.png",
+      image: "/assets/images/luxury_backyard_pool_1771469141679.webp",
       link: { href: "https://www.phta.org/", text: "Pool renovation best practices" }
     },
     {
@@ -1199,7 +1205,7 @@ const ServicesPage = ({ targetServiceId, setTargetServiceId }: { targetServiceId
       title: "Weekly Pool Service",
       description: "Starting at $119/mo. Our primary service package ensuring consistent, professional care for your pool.",
       items: ["Weekly Service", "Chemical Balancing", "Equipment Check", "Surface Skimming", "Basket Emptying"],
-      image: "/assets/images/weekly_pool_service_action_1771468201115.png",
+      image: "/assets/images/weekly_pool_service_action_1771468201115.webp",
       link: { href: "https://www.cdc.gov/healthy-swimming/", text: "CDC pool maintenance guidelines" }
     },
     {
@@ -1207,7 +1213,7 @@ const ServicesPage = ({ targetServiceId, setTargetServiceId }: { targetServiceId
       title: "Deluxe Pool Service",
       description: "$199/mo. The ultimate peace of mind package with priority support and advanced maintenance.",
       items: ["All Weekly Features", "Filter Cleaning Included", "Priority Dispatch", "Detailed Digital Reports", "Salt Cell Inspection"],
-      image: "/assets/images/deluxe_pool_luxury_1771468970085.png",
+      image: "/assets/images/deluxe_pool_luxury_1771468970085.webp",
       link: { href: "https://www.nspf.org/", text: "About CPO certification standards" }
     },
     {
@@ -1215,7 +1221,7 @@ const ServicesPage = ({ targetServiceId, setTargetServiceId }: { targetServiceId
       title: "Repairs & Installs",
       description: "Factory trained technicians providing prompt and reliable solutions for all major brands.",
       items: ["Pump Repairs", "Filter Cleans", "Heater Troubleshooting", "Automation Systems", "Plumbing Leaks"],
-      image: "/assets/images/weekly_service_tech_1771468929887.png",
+      image: "/assets/images/weekly_service_tech_1771468929887.webp",
       link: { href: "https://www.energy.gov/energysaver/swimming-pool-energy-efficiency", text: "DOE pool equipment efficiency guide" }
     }
   ];
@@ -1225,7 +1231,7 @@ const ServicesPage = ({ targetServiceId, setTargetServiceId }: { targetServiceId
       <PageHero
         title="Aquatic Mastery"
         subtitle="A comprehensive suite of services tailored to the most demanding aquatic environments."
-        src="/assets/images/luxury_backyard_pool_1771469141679.png"
+        src="/assets/images/luxury_backyard_pool_1771469141679.webp"
       />
       <div className="container mx-auto px-6 py-24">
         <div className="space-y-32">
@@ -1276,7 +1282,7 @@ const AboutPage = () => {
       <PageHero
         title="Our Philosophy"
         subtitle="Precision pool care driven by over 18 years of hands-on experience."
-        src="/assets/images/deluxe_pool_service_1771467861412.png"
+        src="/assets/images/deluxe_pool_service_1771467861412.webp"
       />
       <div className="container mx-auto px-6 py-24">
 
@@ -1297,7 +1303,7 @@ const AboutPage = () => {
         {/* History Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-32">
           <div className="relative h-[600px]">
-            <ScrollRevealImage src="/assets/images/resort_pool_about.png" alt="Technical expertise" className="h-full object-cover" />
+            <ScrollRevealImage src="/assets/images/resort_pool_about.webp" alt="Technical expertise" className="h-full object-cover" />
             <div className="absolute bottom-8 right-8 bg-white dark:bg-gray-900 p-6 shadow-xl max-w-xs">
               <p className="font-cormorant italic text-xl dark:text-white">"We treat every pool as if it were our own private resort."</p>
             </div>
@@ -1412,7 +1418,7 @@ const BlogListPage = ({ setCurrentPage, setSelectedPostId }: { setCurrentPage: (
                 className="group cursor-pointer block h-full bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 rounded-sm overflow-hidden flex flex-col"
               >
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={post.image} alt={post.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </div>
                 <div className="p-8 flex flex-col flex-1">
                   <div className="font-montserrat text-xs font-bold uppercase tracking-widest text-primary mb-4">{post.date}</div>
